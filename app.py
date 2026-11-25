@@ -326,7 +326,7 @@ can still be used without the AI API.
 
         return response.choices[0].message.content
 
-   except Exception as e:
+    except Exception as e:
     return f"OpenAI API Error: {type(e).__name__}: {e}"
 
 
