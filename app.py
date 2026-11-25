@@ -933,4 +933,4 @@ DIAGNOBOT is an educational prototype.
 
 AI-generated medical information may be incomplete or inaccurate.
 It does not replace a qualified healthcare professional.
-Do not delay emergency care to use this application.
+Do not delay emergency care to use this application.")
