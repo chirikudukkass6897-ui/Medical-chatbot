@@ -12,20 +12,25 @@ from openai import OpenAI
 # --------------------------------------------------
 # CONFIGURATION
 # --------------------------------------------------
-
 load_dotenv()
 
 APP_NAME = "DIAGNOBOT"
 DB_NAME = "diagnobot.db"
 
-API_KEY = os.getenv("OPENAI_API_KEY")
-MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+# Load API key from Streamlit Cloud Secrets or local .env
+try:
+    API_KEY = st.secrets.get("OPENAI_API_KEY", None)
+except Exception:
+    API_KEY = None
 
-st.set_page_config(
-    page_title="DIAGNOBOT Medical AI",
-    page_icon="🩺",
-    layout="wide"
-)
+if not API_KEY:
+    API_KEY = os.getenv("OPENAI_API_KEY")
+
+# Model configuration
+try:
+    MODEL = st.secrets.get("OPENAI_MODEL", "gpt-4o-mini")
+except Exception:
+    MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
 # --------------------------------------------------
 # MEDICAL SAFETY
