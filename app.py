@@ -219,14 +219,15 @@ initialize_database()
 # --------------------------------------------------
 # AI CLIENT
 # --------------------------------------------------
-
 def get_ai_client():
-
     if not API_KEY:
-
         return None
 
-    return OpenAI(api_key=API_KEY)
+    try:
+        return OpenAI(api_key=API_KEY)
+    except Exception as e:
+        st.error(f"OpenAI connection error: {e}")
+        return None
 
 
 SYSTEM_PROMPT = """
@@ -325,12 +326,8 @@ can still be used without the AI API.
 
         return response.choices[0].message.content
 
-    except Exception as e:
-
-        return (
-            "AI service error. Please check your API key, "
-            "internet connection and model configuration."
-        )
+   except Exception as e:
+    return f"OpenAI API Error: {type(e).__name__}: {e}"
 
 
 # --------------------------------------------------
